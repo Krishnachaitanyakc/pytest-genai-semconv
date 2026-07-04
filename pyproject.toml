@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=77.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pytest-genai-semconv"
+version = "0.1.0"
+description = "pytest assertions that verify OpenTelemetry spans conform to the gen_ai semantic conventions."
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.9"
+authors = [{ name = "Krishna Balusu" }]
+keywords = [
+    "opentelemetry",
+    "otel",
+    "genai",
+    "gen_ai",
+    "semantic-conventions",
+    "pytest",
+    "observability",
+    "llm",
+    "agents",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Framework :: Pytest",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Testing",
+    "Topic :: System :: Monitoring",
+]
+dependencies = [
+    "opentelemetry-api>=1.20.0",
+    "opentelemetry-sdk>=1.20.0",
+    "pytest>=7.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Krishnachaitanyakc/pytest-genai-semconv"
+Repository = "https://github.com/Krishnachaitanyakc/pytest-genai-semconv"
+Changelog = "https://github.com/Krishnachaitanyakc/pytest-genai-semconv/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "ruff>=0.5.0"]
+
+# Register the pytest plugin so the `genai_spans` fixture is auto-discovered.
+[project.entry-points.pytest11]
+pytest_genai_semconv = "pytest_genai_semconv.plugin"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+pytest_genai_semconv = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP", "B"]
